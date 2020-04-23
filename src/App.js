@@ -26,14 +26,13 @@ function App() {
 
 
       <Router>
-        <Navbar bg="light" expand="lg">
-
-          <Navbar.Brand as={Link} to='/'>Gestion RH link</Navbar.Brand>
+        <Navbar  className="nav navbar-expand-md navbar-light bg-flow fixed-top ">     
+          <Navbar.Brand  as={Link} to='/'><img className="img-flow" src="flow_technology.png" alt="logo">
+          </img></Navbar.Brand>
+         
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="mr-auto">
-
-
+            <Nav className="mr-auto">                
               <NavDropdown title="Abm's" id="basic-nav-dropdown">
 
                 <NavDropdown.Item as={Link} to='/'>Home</NavDropdown.Item>
