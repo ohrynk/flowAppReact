@@ -23,14 +23,18 @@ const LoginScreenbs = (props) =>{
 
        serviceLogin(username, password)
        .then(res=>{
-         if (res.token != null) {
-           console.log("Token: " + res.token);
-           setMessage(res.token);
-         }else {
-           console.log("Error: " + res);
-           setMessage("Usuario o contraseña incorrecto");
-
+         if (res.status==200){
+           if (res.token != null) {
+             console.log("Token: " + res.token);
+             setMessage(res.token);
+           }else{
+             setMessage("Usuario o contraseña incorrecto");
+           };
+         }else{
+           
+           setMessage("Error: "+ res.message);
          }
+
        });
      };
 
