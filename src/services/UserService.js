@@ -15,9 +15,8 @@
       body: JSON.stringify(json_data),
     })
     .then((response) => {
-        console.log("serviceLogin");
         if (response.status < 200 || response.status > 300){
-          throw Error("No se pudo conectar con el servidor");
+          throw Error("No se pudo conectar con el servidor"+ response.status + " "+ response.statusText);
         }
         return response.json();
     })
