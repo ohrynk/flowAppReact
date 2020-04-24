@@ -6,9 +6,9 @@ import {
   Form,
   Button
 } from 'react-bootstrap';
+import Layout from '../../layouts/Layout';
 
-
-const PaisesScreen = (props) =>{
+const PaisesListScreen = (props) =>{
     //variables
     const [valor, setValor] = useState('');
 
@@ -19,6 +19,7 @@ const PaisesScreen = (props) =>{
 
 
   return (
+    <Layout>
     <Container style={{ padding: 100 }}>
       <Row>
       <Col>
@@ -26,7 +27,8 @@ const PaisesScreen = (props) =>{
       </Col>
       </Row>
     </Container>
+    </Layout>
   );
 }
 
-export default PaisesScreen;
+export default PaisesListScreen;

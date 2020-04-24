@@ -1,7 +1,7 @@
 
 
   const  serviceLogin = (u, p ) =>{
-    var url = 'http://3.22.234.208/v1/api-token-auth/';
+    var url = 'https://testing.flowapigestionrh.dns-cloud.net/v1/api-token-auth/';
     var json_data = {username:u, password:p};
 
 
@@ -15,9 +15,9 @@
       body: JSON.stringify(json_data),
     })
     .then((response) => {
-        if (response.status < 200 || response.status > 300){
-          throw Error("No se pudo conectar con el servidor"+ response.status + " "+ response.statusText);
-        }
+
+        if (response.status ==400) throw new Error("Usuario o contraseña invalida");
+        if (!response.ok) throw Error("No se pudo conectar con el servidor "+ response.status + " "+ response.statusText);
         return response.json();
     })
     .catch(error => {

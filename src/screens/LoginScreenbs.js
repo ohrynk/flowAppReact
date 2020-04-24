@@ -8,9 +8,15 @@ import {
 } from 'react-bootstrap';
 import serviceLogin  from '../services/UserService';
 
+import {
+  Redirect,
+  useHistory,
+  useLocation
+} from "react-router-dom";
 
 
 const LoginScreenbs = (props) =>{
+    let history = useHistory();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [message, setMessage] = useState('');
@@ -23,17 +29,15 @@ const LoginScreenbs = (props) =>{
 
        serviceLogin(username, password)
        .then(res=>{
-         if (res.status==200){
            if (res.token != null) {
              console.log("Token: " + res.token);
-             setMessage(res.token);
+             //setMessage(res.token);
+             localStorage.setItem('token',res.token );
+             history.push('/dashboard');
            }else{
-             setMessage("Usuario o contraseña incorrecto");
+             setMessage("Error: " + res.message);
            };
-         }else{
-           
-           setMessage("Error: "+ res.message);
-         }
+
 
        });
      };
@@ -41,6 +45,8 @@ const LoginScreenbs = (props) =>{
 
   return (
     <Container className="justify-content-md-center" >
+
+    <br/>
     <Row>
         <Col md={{ span: 4, offset: 4 }}>
             <Form>

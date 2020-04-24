@@ -7,8 +7,9 @@ import {
   Button
 } from 'react-bootstrap';
 
+import Layout from '../layouts/Layout';
 
-const HomeScreen = (props) =>{
+const BaseScreen = (props) =>{
     //variables
     const [valor, setValor] = useState('');
 
@@ -19,18 +20,16 @@ const HomeScreen = (props) =>{
 
 
   return (
-
+    <Layout>
     <Container style={{ padding: 100 }}>
       <Row>
       <Col>
-        Home
-
-        
+          Dashboard
       </Col>
       </Row>
     </Container>
-
+    </Layout>
   );
 }
 
-export default HomeScreen;
+export default BaseScreen;

@@ -12,12 +12,52 @@ import {
   Switch,
   Route,
   Link,
-  NavLink
+  NavLink,
+  Redirect
 } from "react-router-dom";
 
 import LoginScreenbs from './screens/LoginScreenbs';
 import HomeScreen from './screens/HomeScreen';
-import PaisesScreen from './screens/paises/PaisesListScreen';
+import PaisesListScreen from './screens/paises/PaisesListScreen';
+import DashboardScreen from './screens/DashboardScreen';
+
+localStorage.setItem('token', null);
+
+
+
+const fakeAuth = {
+  isAuthenticated: false,
+  authenticate(cb) {
+    fakeAuth.isAuthenticated = true;
+    setTimeout(cb, 100); // fake async
+  },
+  signout(cb) {
+    fakeAuth.isAuthenticated = false;
+    setTimeout(cb, 100);
+  }
+};
+
+
+function PrivateRoute({ children, ...rest }) {
+  return (
+    <Route
+      {...rest}
+      render={({ location }) =>
+        //fakeAuth.isAuthenticated ? (
+        localStorage.getItem('token') ? (
+          children
+        ) : (
+          <Redirect
+            to={{
+              pathname: "/login",
+              state: { from: location }
+            }}
+          />
+        )
+      }
+    />
+  );
+}
 
 
 function App() {
@@ -26,34 +66,14 @@ function App() {
 
 
       <Router>
-        <Navbar  className="nav navbar-expand-md navbar-light bg-flow fixed-top ">     
-          <Navbar.Brand  as={Link} to='/'><img className="img-flow" src="flow_technology.png" alt="logo">
-          </img></Navbar.Brand>
-         
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="mr-auto">                
-              <NavDropdown title="Abm's" id="basic-nav-dropdown">
-
-                <NavDropdown.Item as={Link} to='/'>Home</NavDropdown.Item>
-                <NavDropdown.Item as={Link} to='/login'>Login</NavDropdown.Item>
-                <NavDropdown.Item as={Link} to='/paises'>Paises</NavDropdown.Item>
-
-                <NavDropdown.Divider />
-
-              </NavDropdown>
-            </Nav>
-
-          </Navbar.Collapse>
-        </Navbar>
-
-
-
 
         <Switch>
-          <Route exact path="/"><HomeScreen /> </Route>
+
           <Route path="/login"> <LoginScreenbs /></Route>
-          <Route path="/paises"> <PaisesScreen /></Route>
+          <PrivateRoute exact path="/"> <HomeScreen /></PrivateRoute>
+          <PrivateRoute path="/dashboard"> <DashboardScreen /> </PrivateRoute>
+          <PrivateRoute path="/paises"> <PaisesListScreen /> </PrivateRoute>
+
         </Switch>
 
     </Router>
