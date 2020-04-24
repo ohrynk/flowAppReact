@@ -15,6 +15,8 @@ import {
 } from "react-router-dom";
 
 class Layout extends React.Component {
+
+
     render() {
         const  {
             children,
@@ -22,7 +24,7 @@ class Layout extends React.Component {
 
         return (
             <Fragment>
-                <Navbar  className="nav navbar-expand-md navbar-light bg-flow fixed-top ">
+                <Navbar bg="light" expand="lg" className="nav navbar-expand-md navbar-light bg-flow fixed-top ">
                   <Navbar.Brand as={Link} to='/'>
                   <img className="img-flow" src="flow_technology.png" alt="logo">
                   </img></Navbar.Brand>
@@ -37,7 +39,12 @@ class Layout extends React.Component {
                         <NavDropdown.Item as={Link} to='/paises'>Paises</NavDropdown.Item>
 
                         <NavDropdown.Divider />
+                        <NavDropdown.Item as={Link} to='/' onClick={()=>{
 
+                                localStorage.setItem("token", null) ;
+                                alert("token storage: " + localStorage.getItem("token"));
+                                
+                              }}>Salir</NavDropdown.Item>
                       </NavDropdown>
                     </Nav>
 

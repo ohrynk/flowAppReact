@@ -7,14 +7,21 @@ import {
   Button
 } from 'react-bootstrap';
 
+import {
+  Redirect,
+  useHistory,
+  useLocation
+} from "react-router-dom";
+
 
 const HomeScreen = (props) =>{
     //variables
     const [valor, setValor] = useState('');
-
+    let history = useHistory();
     //metodos
-    const handleSignIn = event => {
+    const gotoLogin = event => {
         console.log(valor);
+        history.push('/login');
      };
 
 
@@ -23,9 +30,12 @@ const HomeScreen = (props) =>{
     <Container style={{ padding: 100 }}>
       <Row>
       <Col>
-        Home
+<h3>Landing Page </h3>
 
-        
+        <Button variant="primary" type="button" onClick={gotoLogin}>
+        Ir al Login
+        </Button>
+
       </Col>
       </Row>
     </Container>
