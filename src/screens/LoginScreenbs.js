@@ -6,7 +6,7 @@ import {
   Form,
   Button
 } from 'react-bootstrap';
-import serviceLogin  from '../services/UserService';
+import UserService from '../services/UserService';
 
 import {
   Redirect,
@@ -24,21 +24,15 @@ const LoginScreenbs = (props) =>{
      const handleSignIn = event => {
        event.preventDefault();
 
-       console.log("usuario: "+ username);
-       console.log("password: "+ password);
-
-       serviceLogin(username, password)
+       UserService.serviceLogin(username, password)
        .then(res=>{
            if (res.token != null) {
-             console.log("Token: " + res.token);
-             //setMessage(res.token);
-             localStorage.setItem('token',res.token );
+            localStorage.setItem('user', username  );
+            localStorage.setItem('token', res.token );
              history.push('/dashboard');
            }else{
              setMessage("Error: " + res.message);
            };
-
-
        });
      };
 

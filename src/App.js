@@ -21,9 +21,6 @@ import HomeScreen from './screens/HomeScreen';
 import PaisesListScreen from './screens/paises/PaisesListScreen';
 import DashboardScreen from './screens/DashboardScreen';
 
-localStorage.setItem('token', null);
-
-
 
 const fakeAuth = {
   isAuthenticated: false,
