@@ -77,7 +77,7 @@ const handleLogout = event => {
         </nav>
   <ContainerDetalle>
       
-      {children}
+      {props.children}
    
      
   </ContainerDetalle>
