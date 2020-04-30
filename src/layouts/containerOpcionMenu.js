@@ -1,6 +1,5 @@
 import React,{Fragment} from 'react';
 
-import Layout from '../layouts/Layout';
 class ContainerDetalle extends React.Component {
    
     render () {
@@ -26,6 +25,3 @@ class ContainerDetalle extends React.Component {
 }
 
 export default ContainerDetalle;
-
-
-
