@@ -13,34 +13,28 @@ import {
   useLocation
 } from "react-router-dom";
 
+import BaseScreen from '../screens/DashboardScreen'
+import LoginScreenbs from '../screens/LoginScreenbs'
+
 
 const HomeScreen = (props) =>{
-    //variables
-    const [valor, setValor] = useState('');
-    let history = useHistory();
-    //metodos
-    const gotoLogin = event => {
-        console.log(valor);
-        history.push('/login');
-     };
 
+  if(localStorage.getItem('token') != null) {
+    if(localStorage.getItem('token') != "null") {
+      return (
+        <BaseScreen></BaseScreen>
+      );
+    } else {
+      return (
+        <LoginScreenbs></LoginScreenbs>
+      );
+    }
+  } else {
+    return (
+      <LoginScreenbs></LoginScreenbs>
+    );
+  }
 
-  return (
-
-    <Container style={{ padding: 100 }}>
-      <Row>
-      <Col>
-<h3>Landing Page </h3>
-
-        <Button variant="primary" type="button" onClick={gotoLogin}>
-        Ir al Login
-        </Button>
-
-      </Col>
-      </Row>
-    </Container>
-
-  );
 }
 
 export default HomeScreen;
