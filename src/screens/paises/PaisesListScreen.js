@@ -8,7 +8,9 @@ import {
 } from 'react-bootstrap';
 import Layout from '../../layouts/Layout';
 
+
 const PaisesListScreen = (props) =>{
+  
     //variables
     const [valor, setValor] = useState('');
 
@@ -17,13 +19,15 @@ const PaisesListScreen = (props) =>{
         console.log(valor);
      };
 
-
+    
   return (
     <Layout>
     <Container style={{ padding: 100 }}>
       <Row>
       <Col>
-        Paises
+      
+      paises
+    
       </Col>
       </Row>
     </Container>
