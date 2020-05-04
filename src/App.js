@@ -20,9 +20,8 @@ import LoginScreenbs from './screens/LoginScreenbs';
 import HomeScreen from './screens/HomeScreen';
 import PaisesListScreen from './screens/paises/PaisesListScreen';
 import DashboardScreen from './screens/DashboardScreen';
+import ChangePassword from './screens/ChangePassword';
 import EmpleadoScreen from './screens/empleados/EmpleadoScreen';
-
-
 const fakeAuth = {
   isAuthenticated: false,
   authenticate(cb) {
@@ -82,8 +81,9 @@ function App() {
 
           <Route path="/login"> <LoginScreenbs /></Route>
           <PrivateRoute exact path="/"> <HomeScreen /></PrivateRoute>
-          <PrivateRoute exact path="/dashboard"> <DashboardScreen /> </PrivateRoute>
-          <PrivateRoute exact path="/paises"> <PaisesListScreen /> </PrivateRoute>
+          <PrivateRoute path="/dashboard"> <DashboardScreen /> </PrivateRoute>
+          <PrivateRoute path="/paises"> <PaisesListScreen /> </PrivateRoute>
+          <PrivateRoute path="/changePassword"><ChangePassword></ChangePassword></PrivateRoute>
           <PrivateRoute exact path="/empleados"> <EmpleadoScreen /> </PrivateRoute>
 
           <Route path="*">

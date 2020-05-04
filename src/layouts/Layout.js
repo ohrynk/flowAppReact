@@ -62,7 +62,7 @@ const handleLogout = event => {
 
 
                           <NavDropdown.Item as={Link} to='/micuenta'>Mi Cuenta</NavDropdown.Item>
-                          <NavDropdown.Item as={Link} to='/cambiarpass'>Cambiar Contraseña</NavDropdown.Item>
+                          <NavDropdown.Item as={Link} to='/changePassword'>Cambiar Contraseña</NavDropdown.Item>
 
                           <NavDropdown.Divider />
                           <NavDropdown.Item as={Link} to='/' onClick={handleLogout}>Salir</NavDropdown.Item>
@@ -74,7 +74,7 @@ const handleLogout = event => {
               </ul>
             </div>
         </nav>
-        
+
         <ContainerDetalle>
 
             {props.children}
