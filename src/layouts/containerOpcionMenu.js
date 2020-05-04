@@ -1,7 +1,10 @@
 import React,{Fragment} from 'react';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 class ContainerDetalle extends React.Component {
-   
+
     render () {
       const  {
         children,
@@ -9,14 +12,12 @@ class ContainerDetalle extends React.Component {
 
     return(
         <Fragment>
-        <div class="container-fluid">
-          <h1 class="mt-4"></h1>
-          <p></p>
-          <code></code>
-          <div>
-                {children}
-          </div>
-        </div>
+        <Container fluid>
+        <Row>
+          <Col>    {children}</Col>
+        </Row>
+      </Container>
+
         </Fragment>
       );
     }

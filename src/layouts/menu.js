@@ -18,9 +18,9 @@ class Menu extends React.Component {
                   </img></Navbar.Brand></div>
         <div class="list-group list-group-flush">
           <a href="#" class="list-group-item list-group-item-action bg-light" ><Link to="/">Home</Link></a>
-          <a href="#" class="list-group-item list-group-item-action bg-light"><Link to="/login">Login</Link></a>
-          <a href="#" class="list-group-item list-group-item-action bg-light"><Link to="/paises">Paises</Link></a>
-         
+          
+          <a href="#" class="list-group-item list-group-item-action bg-light"><Link to="/empleados">Empleados</Link></a>
+
         </div>
         </Fragment>
         );

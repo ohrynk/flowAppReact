@@ -9,17 +9,18 @@ import FormControl from 'react-bootstrap/FormControl';
 import Button from 'react-bootstrap/Button';
 import {
   BrowserRouter as Router,
-  Switch,
   Route,
   Link,
-  NavLink,
-  Redirect
+  Switch,
+  Redirect,
+  useLocation
 } from "react-router-dom";
 
 import LoginScreenbs from './screens/LoginScreenbs';
 import HomeScreen from './screens/HomeScreen';
 import PaisesListScreen from './screens/paises/PaisesListScreen';
 import DashboardScreen from './screens/DashboardScreen';
+import EmpleadoScreen from './screens/empleados/EmpleadoScreen';
 
 
 const fakeAuth = {
@@ -57,6 +58,19 @@ function PrivateRoute({ children, ...rest }) {
 }
 
 
+
+function NoMatch() {
+  let location = useLocation();
+
+  return (
+    <div>
+      <h3>
+        No match for <code>{location.pathname}</code>
+      </h3>
+    </div>
+  );
+}
+
 function App() {
   return (
     <div className="App">
@@ -68,9 +82,13 @@ function App() {
 
           <Route path="/login"> <LoginScreenbs /></Route>
           <PrivateRoute exact path="/"> <HomeScreen /></PrivateRoute>
-          <PrivateRoute path="/dashboard"> <DashboardScreen /> </PrivateRoute>
-          <PrivateRoute path="/paises"> <PaisesListScreen /> </PrivateRoute>
+          <PrivateRoute exact path="/dashboard"> <DashboardScreen /> </PrivateRoute>
+          <PrivateRoute exact path="/paises"> <PaisesListScreen /> </PrivateRoute>
+          <PrivateRoute exact path="/empleados"> <EmpleadoScreen /> </PrivateRoute>
 
+          <Route path="*">
+            <NoMatch />
+          </Route>
         </Switch>
 
     </Router>
