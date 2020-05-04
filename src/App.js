@@ -20,7 +20,7 @@ import LoginScreenbs from './screens/LoginScreenbs';
 import HomeScreen from './screens/HomeScreen';
 import PaisesListScreen from './screens/paises/PaisesListScreen';
 import DashboardScreen from './screens/DashboardScreen';
-
+import ChangePassword from './screens/ChangePassword';
 
 const fakeAuth = {
   isAuthenticated: false,
@@ -70,7 +70,7 @@ function App() {
           <PrivateRoute exact path="/"> <HomeScreen /></PrivateRoute>
           <PrivateRoute path="/dashboard"> <DashboardScreen /> </PrivateRoute>
           <PrivateRoute path="/paises"> <PaisesListScreen /> </PrivateRoute>
-
+          <PrivateRoute path="/changePassword"><ChangePassword></ChangePassword></PrivateRoute>
         </Switch>
 
     </Router>
