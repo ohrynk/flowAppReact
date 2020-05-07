@@ -5,7 +5,8 @@
   }
 
   const  serviceLogin = (u, p ) =>{
-    var url = 'https://testing.flowapigestionrh.dns-cloud.net/v1/api-token-auth/';
+    //var url = 'https://testing.flowapigestionrh.dns-cloud.net/v1/api-token-auth/';
+    var url = 'http://127.0.0.1:8000/v1/api-token-auth/';
     var json_data = {username:u, password:p};
 
     return fetch(url, {

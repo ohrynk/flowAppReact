@@ -9,25 +9,43 @@ import {
   Tabs
 } from 'react-bootstrap';
 import Layout from '../../layouts/Layout';
+import {EmpleadoAddService } from '../../services/EmpleadoService';
 import {Redirect, useHistory,useLocation } from "react-router-dom";
 
 
 
 const EmpleadoScreen = (props) =>{
     //variables
-    const [valor, setValor] = useState('');
+    let history = useHistory();
+
+    const [message, setMessage] = useState("");
     const [formState, setFormState] = useState({
-      isValid: false,
-      values: {},
-      touched: {},
-      errors: {},
-    });
+       isValid: false,
+       values: {},
+       touched: {},
+       errors: {},
+     });
 
 
-    //metodos
-    const handleSignIn = event => {
-        console.log(valor);
-     };
+     //validar informacion
+      const formIsOk=()=>{
+        let valid = true;
+        console.log("Datos: " + formState.values.nombre);
+
+        if (!formState.values.nombre || formState.values.nombre===""||formState.values.nombre===" "){
+           alert("Nombre es Obligatorio");
+           return false ;
+        }
+        if (!formState.values.apellido || formState.values.apellido===""||formState.values.apellido===" "){
+           alert("Apellido es Obligatorio");
+           return false ;
+        }
+
+
+        //validar cbu solo numerico
+        return true ;
+      }
+
 
      const handleChange = event => {
          event.persist();
@@ -48,7 +66,26 @@ const EmpleadoScreen = (props) =>{
          }));
        };
 
+       //Empleado Edit
+          const handleSubmit= event =>{
+            event.preventDefault();
+            if (formIsOk){
 
+               EmpleadoAddService(formState)
+               .then((res)=>{
+
+                   if(res.status===200){
+                     alert("Guardado correctamente");
+                   }
+                   if (res.status!==200){
+                     setMessage("Error: " + res.message);
+                   }
+
+               });
+
+            }
+
+          }
        //validar datos
 
 
@@ -62,25 +99,62 @@ const EmpleadoScreen = (props) =>{
               <Tab eventKey="perfil" title="Perfil">
 
               <Form.Group >
-                <Form.Label>Reporta a </Form.Label>
-
+                <Form.Label>Usuario de sistema</Form.Label>
                 <Form.Control type="text"
-                placeholder="Reporta a"
+                name="username"
+                id="username"
+                onChange={handleChange}
+                value={formState.values.username || ''}
+                />
+                <Form.Text className="text-muted">
+                </Form.Text>
+              </Form.Group>
+
+
+              <Form.Group >
+                <Form.Label>Contraseña</Form.Label>
+                <Form.Control type="password"
+                name="password"
+                id="password"
+                onChange={handleChange}
+                value={formState.values.password || ''}
+                />
+                <Form.Text className="text-muted">
+                </Form.Text>
+              </Form.Group>
+
+
+              <Form.Group >
+                <Form.Label>Repetir contraseña</Form.Label>
+                <Form.Control type="password"
+                name="password2"
+                id="password2"
+                onChange={handleChange}
+                value={formState.values.password2 || ''}
+                />
+                <Form.Text className="text-muted">
+                </Form.Text>
+              </Form.Group>
+
+
+              <Form.Group >
+                <Form.Label>Reporta a </Form.Label>
+                <Form.Control type="text"
+
                 name="reporta"
                 id="reporta"
                 onChange={handleChange}
                 value={formState.values.reporta || ''}
                 />
-
                 <Form.Text className="text-muted">
-
                 </Form.Text>
               </Form.Group>
+
 
               <Form.Group>
                 <Form.Label>Email</Form.Label>
                 <Form.Control type="text"
-                placeholder="Email"
+
                 name="email"
                 id="email"
                 onChange={handleChange}
@@ -94,7 +168,7 @@ const EmpleadoScreen = (props) =>{
               <Form.Group>
                 <Form.Label>Oficina</Form.Label>
                 <Form.Control type="text"
-                placeholder="Oficina"
+
                 name="oficina"
                 id="oficina"
                 onChange={handleChange}
@@ -122,7 +196,6 @@ const EmpleadoScreen = (props) =>{
                 <Form.Group>
                   <Form.Label>Nombre</Form.Label>
                   <Form.Control type="text"
-                  placeholder="Nombre"
                   name="nombre"
                   id="nombre"
                   onChange={handleChange}
@@ -137,7 +210,6 @@ const EmpleadoScreen = (props) =>{
                 <Form.Group>
                   <Form.Label>Apellido</Form.Label>
                   <Form.Control type="text"
-                  placeholder="Apellido"
                   name="apellido"
                   id="apellido"
                   onChange={handleChange}
@@ -151,11 +223,10 @@ const EmpleadoScreen = (props) =>{
                 <Form.Group>
                   <Form.Label>Fecha Nacimiento</Form.Label>
                   <Form.Control type="text"
-                  placeholder="Fecha Nacimiento"
                   name="fechanac"
                   id="fechanac"
                   onChange={handleChange}
-                  value={formState.values.fechanac || ''}
+                  value={formState.values.fechanacimiento || ''}
                   />
                   <Form.Text className="text-muted">
 
@@ -208,14 +279,13 @@ const EmpleadoScreen = (props) =>{
                 <Form.Group>
                   <Form.Label>Numero de cuenta Bancaria</Form.Label>
                   <Form.Control type="text"
-                  placeholder="Nro Cta Banco"
-                  name="cuenta"
-                  id="cuenta"
-                  onChange={handleChange}
-                  value={formState.values.cuenta || ''}
+                  placeholder="CBU Banco"
+                  name="cbu"
+                  id="cbu"
+                  onChange ={handleChange}
+                  value={formState.values.cbu || ''}
                   />
                   <Form.Text className="text-muted">
-
                   </Form.Text>
                 </Form.Group>
 
@@ -223,13 +293,12 @@ const EmpleadoScreen = (props) =>{
                   <Form.Label>Documento de Identidad</Form.Label>
                   <Form.Control type="text"
                   placeholder="Documento de indentidad"
-                  name="cuenta"
-                  id="cuenta"
+                  name="nrodocumento"
+                  id="nrodocumento"
                   onChange={handleChange}
                   value={formState.values.nrodocumento || ''}
                   />
                   <Form.Text className="text-muted">
-
                   </Form.Text>
                 </Form.Group>
 
@@ -242,10 +311,10 @@ const EmpleadoScreen = (props) =>{
                 <Form.Group>
                   <Form.Label>Direccion 1</Form.Label>
                   <Form.Control type="text"
-                  name="direccion1"
-                  id="direccion1"
+                  name="direccion"
+                  id="direccion"
                   onChange={handleChange}
-                  value={formState.values.direccion1 || ''}
+                  value={formState.values.direccion || ''}
                   />
                   <Form.Text className="text-muted">
 
